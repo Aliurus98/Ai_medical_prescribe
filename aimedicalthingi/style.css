@@ -1,0 +1,119 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0B1120; /* Dark blue-gray background */
+    color: #E0E0E0; /* Light gray text for better contrast */
+}
+
+.hero-section {
+    background-image: url('images/26807.jpg'); /* Placeholder background */
+    background-size: cover;
+    background-position: center;
+}
+
+.btn-primary {
+    background-color: #3B82F6; /* Blue */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2563EB; /* Darker Blue */
+}
+
+.btn-secondary {
+    background-color: #10B981; /* Teal */
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #059669; /* Darker Teal */
+}
+
+.section-bg {
+    background-color: #1E293B; /* Slightly lighter dark blue-gray for sections */
+}
+
+.card-bg {
+    background-color: #293548; /* Even lighter for cards */
+}
+
+.footer-bg {
+    background-color: #0F172A; /* Darkest for footer */
+}
+
+.icon-placeholder {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background-color: #1E293B;
+    margin: 10% auto;
+    padding: 24px;
+    border: 1px solid #3B82F6;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #E0E0E0;
+    text-decoration: none;
+}
+
+#loadingIndicator {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    z-index: 2000; /* Ensure it's above other content */
+    color: #333;
+    font-size: 1.2em;
+}
+
+#prescriptionDetails pre {
+    white-space: pre-wrap;      /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap;    /* Opera 4-6 */
+    white-space: -o-pre-wrap;  /* Opera 7 */
+    word-wrap: break-word;      /* Internet Explorer 5.5+ */
+    background-color: #293548;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: #E0E0E0;
+    max-height: 400px;
+    overflow-y: auto;
+}

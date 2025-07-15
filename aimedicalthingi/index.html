@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthWise - Simplify Your Prescription Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+
+    <div id="loadingIndicator">
+        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Processing Prescription... Please Wait.
+    </div>
+
+    <div id="prescriptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2 class="text-2xl font-semibold mb-4 text-blue-400">Prescription Details</h2>
+            <div id="prescriptionDetails" class="text-sm">
+                <p>No details extracted yet. Please upload a prescription image.</p>
+            </div>
+            <button onclick="closeModal()" class="mt-6 btn-primary py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Close</button>
+        </div>
+    </div>
+
+    <header class="footer-bg shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-blue-400 h-8 w-8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M3.22 12H3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1"></path></svg>
+                HealthWise
+            </a>
+            <nav class="space-x-4">
+                <a href="#" class="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                <a href="#how-it-works" class="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium">How it Works</a>
+                <a href="#benefits" class="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium">Benefits</a>
+                <a href="#contact" class="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                <label for="prescriptionUploadNav" class="btn-primary py-2 px-4 rounded-lg text-sm font-medium cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-1 -mt-1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    Upload Prescription
+                </label>
+                <input type="file" id="prescriptionUploadNav" class="hidden" accept="image/*" onchange="handleImageUpload(event)">
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section py-20 md:py-32">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Simplify Your Prescription Management
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                Upload a photo of your prescription and let our AI organize the
+                details for you. Effortless, accurate, and secure.
+            </p>
+            <label for="prescriptionUploadHero" class="btn-primary py-3 px-8 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 -mt-1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                Upload & Analyze Now
+            </label>
+            <input type="file" id="prescriptionUploadHero" class="hidden" accept="image/*" onchange="handleImageUpload(event)">
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-16 md:py-24 section-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How It Works</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">
+                    A simple three-step process to get your prescription information organized and accessible.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 md:gap-12 text-center">
+                <div class="card-bg p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div class="icon-placeholder bg-blue-500 text-white mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><line x1="12" x2="12" y1="8" y2="16"></line><line x1="8" x2="16" y1="12" y2="12"></line></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">1. Upload Prescription</h3>
+                    <p class="text-gray-400 text-sm">
+                        Snap a photo or upload a file of your doctor's prescription. We accept various image formats.
+                    </p>
+                </div>
+                <div class="card-bg p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div class="icon-placeholder bg-green-500 text-white mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path><path d="m15 5 3 3"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">2. AI Processing</h3>
+                    <p class="text-gray-400 text-sm">
+                        Our intelligent AI analyzes the uploaded image, extracting key information with high accuracy.
+                    </p>
+                </div>
+                <div class="card-bg p-8 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div class="icon-placeholder bg-purple-500 text-white mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">3. View Organized Details</h3>
+                    <p class="text-gray-400 text-sm">
+                        Access your prescription details in a clear, structured format: medication, dosage, and instructions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="py-16 md:py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Benefits of Using HealthWise</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">
+                    Discover the advantages of having your prescription information digitized and organized.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+                <div class="flex items-start space-x-4 p-6 card-bg rounded-xl shadow-lg">
+                    <div class="icon-placeholder bg-green-500 text-white flex-shrink-0 mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Accurate Information</h3>
+                        <p class="text-gray-400 text-sm">
+                            AI-powered extraction minimizes errors, ensuring you have reliable details at your fingertips.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-6 card-bg rounded-xl shadow-lg">
+                    <div class="icon-placeholder bg-blue-500 text-white flex-shrink-0 mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Save Time</h3>
+                        <p class="text-gray-400 text-sm">
+                            Quickly access your prescription information without manual data entry or deciphering handwriting.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-6 card-bg rounded-xl shadow-lg">
+                    <div class="icon-placeholder bg-red-500 text-white flex-shrink-0 mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Secure & Private</h3>
+                        <p class="text-gray-400 text-sm">
+                           We prioritize your privacy and data security using robust encryption technologies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 md:py-24 section-bg">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Ready to Simplify Your Prescriptions?
+            </h2>
+            <p class="text-lg text-gray-400 mb-10 max-w-xl mx-auto">
+                Upload your prescription now and experience the convenience of AI-organized information. It's fast, easy, and secure.
+            </p>
+            <label for="prescriptionUploadCTA" class="btn-secondary py-3 px-8 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transition duration-300 cursor-pointer">
+                Get Started Now
+            </label>
+            <input type="file" id="prescriptionUploadCTA" class="hidden" accept="image/*" onchange="handleImageUpload(event)">
+        </div>
+    </section>
+
+    <footer class="footer-bg py-8">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <div class="flex justify-center items-center mb-4">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 text-blue-400 h-7 w-7"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M3.22 12H3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1"></path></svg>
+                <span class="text-xl font-semibold text-white">HealthWise</span>
+            </div>
+            <p class="text-sm mb-4">&copy; <span id="currentYear"></span> HealthWise. All rights reserved. Your health, simplified.</p>
+            <div class="space-x-4">
+                <a href="#" class="hover:text-blue-400 text-xs">Privacy Policy</a>
+                <a href="#" class="hover:text-blue-400 text-xs">Terms of Service</a>
+                <a href="#" class="hover:text-blue-400 text-xs">FAQ</a>
+            </div>
+        </div>
+    </footer>
+<script src="script.js"></script>
+</body>
+</html>
