@@ -1,12 +1,9 @@
-// js/dom-elements.js
 
-// Get DOM elements (export them for use in main.js)
 export const elements = {
     currentYear: document.getElementById('currentYear'),
     prescriptionModal: document.getElementById('prescriptionModal'),
     prescriptionDetailsDiv: document.getElementById('prescriptionDetails'),
     loadingIndicator: document.getElementById('loadingIndicator'),
-    // Select all file input elements and attach a common handler
     fileInputs: [
         document.getElementById('prescriptionUploadNav'),
         document.getElementById('prescriptionUploadHero'),
@@ -14,7 +11,7 @@ export const elements = {
     ]
 };
 
-// UI functions (export them)
+
 export function openModal() {
     elements.prescriptionModal.style.display = 'block';
 }
@@ -39,7 +36,6 @@ export function setPrescriptionDetails(htmlContent) {
     elements.prescriptionDetailsDiv.innerHTML = htmlContent;
 }
 
-// Initialize current year on page load
 if (elements.currentYear) {
     elements.currentYear.textContent = new Date().getFullYear();
 }
