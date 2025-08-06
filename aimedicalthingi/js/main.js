@@ -1,7 +1,7 @@
 import { elements, openModal, closeModal, showLoading, hideLoading, setPrescriptionDetails } from './dom-elements.js';
 import { ApiService } from './services/api.service.js';
 
-const GEMINI_API_KEY = "AIzaSyDR2gji0oSVPO40AjCzezedf1T1duktw8w";
+const GEMINI_API_KEY = "REDACTED_API_KEY"; // Replace with your actual Gemini API key
 const MEDICINE_API_URL = "http://127.0.0.1:5000";
 
 //instance of ApiService 
